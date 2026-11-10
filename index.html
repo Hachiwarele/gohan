@@ -7,56 +7,152 @@
 <title>Image Deck — 条件抽選とカタログ</title>
 <style>
 :root {
---artifact-background: #ffffff;
---artifact-background-light: #f1f3f6;
---artifact-background-mid: #e9ecf1;
---artifact-border-light: #e3e6ec;
---artifact-border-dark: #cdd2db;
---artifact-primary-brand: #3559e6;
---artifact-primary-highlight: #0d0f14;
---artifact-primary-hover: #2442b8;
---artifact-selected: #eaeefc;
---artifact-text-primary: #11141a;
---artifact-text-secondary: #5c6470;
---artifact-text-highlight: #e8eefc;
---artifact-negative: #dc4c4c;
+  --artifact-background: #ffffff;
+  --artifact-background-light: #f1f3f6;
+  --artifact-background-mid: #e9ecf1;
+  --artifact-border-light: #e3e6ec;
+  --artifact-border-dark: #cdd2db;
+  --artifact-primary-brand: #3559e6;
+  --artifact-primary-highlight: #0d0f14;
+  --artifact-primary-hover: #2442b8;
+  --artifact-selected: #eaeefc;
+  --artifact-text-primary: #11141a;
+  --artifact-text-secondary: #5c6470;
+  --artifact-text-highlight: #e8eefc;
+  --artifact-negative: #dc4c4c;
 }
 html[data-theme='dark'] {
---artifact-background: #0a0b0e;
---artifact-background-light: #121419;
---artifact-background-mid: #181b22;
---artifact-border-light: #23262e;
---artifact-border-dark: #343844;
---artifact-primary-brand: #6a92ff;
---artifact-primary-highlight: #f5f7fb;
---artifact-primary-hover: #88a8ff;
---artifact-selected: #1a2030;
---artifact-text-primary: #eef0f4;
---artifact-text-secondary: #9aa0ad;
---artifact-text-highlight: #14213d;
---artifact-negative: #ff6b6b;
+  --artifact-background: #0a0b0e;
+  --artifact-background-light: #121419;
+  --artifact-background-mid: #181b22;
+  --artifact-border-light: #23262e;
+  --artifact-border-dark: #343844;
+  --artifact-primary-brand: #6a92ff;
+  --artifact-primary-highlight: #f5f7fb;
+  --artifact-primary-hover: #88a8ff;
+  --artifact-selected: #1a2030;
+  --artifact-text-primary: #eef0f4;
+  --artifact-text-secondary: #9aa0ad;
+  --artifact-text-highlight: #14213d;
+  --artifact-negative: #ff6b6b;
 }
-    * { box-sizing: border-box; } body {  margin: 0; padding: 0; background: var(--artifact-background); color: var(--artifact-text-primary);  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;  font-size: 15px; line-height: 1.55; letter-spacing: -0.01em;  }  button, input, select { font: inherit; }  button, select, input { color: var(--artifact-text-primary); }  button { cursor: pointer; }  .shell { width: min(1100px, 100%); margin: 0 auto; padding: 34px 26px 60px; }  .topline { display:flex; justify-content:space-between; align-items:center; gap:16px; padding-bottom:18px; border-bottom:1px solid var(--artifact-border-light); }  .brand { display:flex; align-items:center; gap:10px; font-size:13px; font-weight:650; letter-spacing:.06em; }  .brand-mark { width:12px; height:12px; border-radius:3px; background:var(--artifact-primary-brand); }  .eyebrow { margin:0 0 8px; color:var(--artifact-text-secondary); font:500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing:.14em; text-transform:uppercase; }  header { padding:38px 0 30px; }  h1 { max-width:760px; margin:0; font-size:clamp(34px, 6vw, 58px); line-height:1.04; letter-spacing:-.055em; font-weight:590; }  .intro { max-width:660px; margin:16px 0 0; color:var(--artifact-text-secondary); font-size:16px; }  .data-status { margin-top:22px; padding:12px 14px; border:1px solid var(--artifact-border-light); border-radius:8px; background:var(--artifact-background-light); color:var(--artifact-text-primary); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 18px; }  .status-copy { min-width:0; }  .status-title { display:block; font-weight:650; margin-bottom:2px; }  .status-detail { display:block; color:var(--artifact-text-secondary); font-size:13px; overflow-wrap:anywhere; }  .section { padding:26px 0 34px; border-top:1px solid var(--artifact-border-light); }  .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:14px; margin-bottom:20px; }  .section-head h2 { margin:0; font-size:25px; letter-spacing:-.035em; font-weight:560; }  .section-desc { margin:6px 0 0; color:var(--artifact-text-secondary); font-size:14px; }  .section-kicker { color:var(--artifact-text-secondary); font:500 11px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing:.12em; text-transform:uppercase; margin-bottom:5px; }  .filters { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:18px 0; }  .filter-field { display:flex; flex-direction:column; gap:6px; min-width:0; }  .filter-field label { color:var(--artifact-text-secondary); font-size:12px; font-weight:600; }  select, input[type="search"] { min-height:42px; width:100%; border:1px solid var(--artifact-border-dark); border-radius:7px; padding:9px 11px; background:var(--artifact-background); color:var(--artifact-text-primary); }  select:focus, input:focus, button:focus-visible { outline:3px solid color-mix(in srgb, var(--artifact-primary-brand) 34%, transparent); outline-offset:2px; }  .toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; }  .btn { min-height:42px; border:1px solid var(--artifact-border-dark); border-radius:7px; background:var(--artifact-background); color:var(--artifact-text-primary); padding:9px 15px; font-weight:620; transition:background .15s ease, border-color .15s ease, transform .15s ease; }  .btn:hover { background:var(--artifact-background-light); }  .btn:active { transform:translateY(1px); }  .btn-primary { border-color:var(--artifact-primary-brand); background:var(--artifact-primary-brand); color:var(--artifact-background); }  .btn-primary:hover { border-color:var(--artifact-primary-hover); background:var(--artifact-primary-hover); color:var(--artifact-background); }  .match-count { color:var(--artifact-text-secondary); font-size:13px; margin-left:auto; }  .featured { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(240px,.85fr); gap:24px; margin-top:20px; align-items:start; }  .featured-media { min-height:260px; background:var(--artifact-background-light); border-radius:10px; overflow:hidden; display:grid; place-items:center; color:var(--artifact-text-secondary); }  .featured-media img { display:block; width:100%; max-height:560px; object-fit:contain; }  .featured-info { padding:4px 0; }  .featured-info h3 { margin:0 0 12px; font-size:22px; font-weight:580; overflow-wrap:anywhere; }  .meta-list { display:grid; grid-template-columns:minmax(90px,.45fr) minmax(0,1fr); gap:8px 14px; margin:0; }  .meta-list dt { color:var(--artifact-text-secondary); font-size:13px; }  .meta-list dd { margin:0; font-size:14px; overflow-wrap:anywhere; }  .empty { padding:28px 16px; border:1px dashed var(--artifact-border-dark); border-radius:9px; text-align:center; color:var(--artifact-text-secondary); }  .catalog-tools { display:grid; grid-template-columns:minmax(220px,1fr) auto; gap:12px; align-items:end; }  .catalog-tools .filters { grid-column:1/-1; margin:0; }  .catalog-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:16px; margin-top:20px; }  .item { min-width:0; }  .item-media { height:200px; display:grid; place-items:center; overflow:hidden; border-radius:8px; background:var(--artifact-background-light); color:var(--artifact-text-secondary); }  .item-media img { display:block; width:100%; height:100%; object-fit:contain; }  .item-name { margin:9px 0 4px; font-size:14px; font-weight:650; overflow-wrap:anywhere; }  .item-meta { color:var(--artifact-text-secondary); font-size:12px; line-height:1.5; overflow-wrap:anywhere; }  .item-meta span + span::before { content:" · "; color:var(--artifact-border-dark); }  .load-more { display:block; margin:20px auto 0; }  .setup { margin-top:20px; padding:16px; border:1px solid var(--artifact-border-light); border-radius:8px; background:var(--artifact-background-light); }  .setup h3 { margin:0 0 7px; font-size:14px; }  .setup p { margin:5px 0; color:var(--artifact-text-secondary); font-size:13px; }  code { padding:2px 5px; border-radius:4px; background:var(--artifact-background-mid); color:var(--artifact-text-primary); font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.92em; overflow-wrap:anywhere; }  .error { color:var(--artifact-negative); }  footer { padding:18px 0 0; border-top:1px solid var(--artifact-border-light); color:var(--artifact-text-secondary); font-size:12px; }  @media (max-width:700px) {  .shell { padding:20px 16px 40px; }  header { padding:30px 0 24px; }  .featured { grid-template-columns:1fr; gap:16px; }  .featured-media { min-height:220px; }  .catalog-tools { grid-template-columns:1fr; }  .catalog-tools .filters { grid-column:auto; }  .section-head { align-items:flex-start; flex-direction:column; }  .match-count { margin-left:0; }  }  @media (prefers-reduced-motion: reduce) { ,::before,::after { scroll-behavior:auto !important; transition:none !important; } }  @media print {  @page { size: auto !important; }  body { margin:0; padding:0.4in 0.6in; background:var(--artifact-background); color:var(--artifact-text-primary); print-color-adjust:exact; -webkit-print-color-adjust:exact; }  .shell { width:100%; max-width:100%; padding:0; }  .btn, .toolbar, .catalog-tools, .setup, .load-more { display:none !important; }  .section { break-inside:avoid; }  .catalog-grid { grid-template-columns:repeat(3,1fr); }  .item { break-inside:avoid; }  }  </style> 
-* </head> <body> 
-    * <main class="shell" data-glean-id="app-shell"> <div class="topline" data-glean-id="app-brand"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>IMAGE DECK</span></div><span class="eyebrow" style="margin:0">LOCAL CATALOG · CSV INDEX</span></div>  <header data-glean-id="app-intro">  <p class="eyebrow">条件抽選と画像カタログ</p>  <h1>条件から探す。<br>ランダムに出会う。</h1>  <p class="intro">CSVに登録した画像の特徴を使って、条件付き抽選とカタログ検索ができます。</p>  <div class="data-status" id="dataStatus" data-glean-id="data-status" aria-live="polite">  <div class="status-copy"><span class="status-title" id="statusTitle">CSVを読み込んでいます</span><span class="status-detail" id="statusDetail">同じ場所にある manifest.csv を確認中です。</span></div>  </div>  <div class="setup" id="setupHelp" data-glean-id="setup-help">  <h3>最初に用意するファイル</h3>  <p><code>index.html</code>と<code>manifest.csv</code>を同じ場所に置き、画像は<code>images/</code>フォルダにまとめます。</p>  <p>CSVの列名は<code>filename,color,size,role,date</code>。filenameには<code>images/1.png</code>のような相対パスを記入します。特徴は列ごとに分けると検索しやすくなります。</p>  <p>ローカルでは<code>file://</code>で直接開かず、ローカルサーバー経由で開いてください。GitHub Pagesに置いた場合は、発行されたページURLから読み込めます。</p>  </div>  </header> 
-<section class="section" aria-labelledby="drawTitle" data-glean-id="random-section">
-<div class="section-head"><div><div class="section-kicker">01 / RANDOM PICK</div><h2 id="drawTitle">条件付きランダム抽選</h2><p class="section-desc">選んだ条件すべてに一致する画像の中から、1枚を抽選します。</p></div></div>
-<div class="filters" id="drawFilters" data-glean-id="random-filters"></div>
-<div class="toolbar"><button class="btn btn-primary" id="drawButton" type="button">条件に合う画像を抽選</button><button class="btn" id="clearDraw" type="button">条件をクリア</button><span class="match-count" id="drawCount" aria-live="polite">データ未読込</span></div>
-<div id="drawResult" class="empty" data-glean-id="random-result" aria-live="polite">CSVを読み込むと抽選できます。</div>
-</section>
-<section class="section" aria-labelledby="catalogTitle" data-glean-id="catalog-section">
-<div class="section-head"><div><div class="section-kicker">02 / SEARCH CATALOG</div><h2 id="catalogTitle">条件検索カタログ</h2><p class="section-desc">条件やキーワードで絞り込み、該当画像を一覧表示します。</p></div></div>
-<div class="catalog-tools">
-<div class="filter-field"><label for="keyword">キーワード</label><input id="keyword" type="search" placeholder="画像名・特徴を検索" autocomplete="off"></div>
-<div class="toolbar"><button class="btn" id="clearCatalog" type="button">検索条件をクリア</button><span class="match-count" id="catalogCount" aria-live="polite">データ未読込</span></div>
-<div class="filters" id="catalogFilters" data-glean-id="catalog-filters"></div>
-</div>
-<div class="catalog-grid" id="catalogGrid" data-glean-id="catalog-grid"></div>
-<button class="btn load-more" id="loadMore" type="button" hidden>さらに表示</button>
-<div id="catalogEmpty" class="empty" hidden>条件に一致する画像がありません。</div>
-</section>
-<footer data-glean-id="app-footer">画像の追加・特徴の変更は、imagesフォルダとmanifest.csvを更新して公開先へ反映してください。</footer>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 0; background: var(--artifact-background); color: var(--artifact-text-primary); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif; font-size: 15px; line-height: 1.55; letter-spacing: -0.01em; }
+button, input, select { font: inherit; color: var(--artifact-text-primary); }
+button { cursor: pointer; }
+.shell { width: min(1100px, 100%); margin: 0 auto; padding: 34px 26px 60px; }
+.topline { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--artifact-border-light); }
+.brand { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 650; letter-spacing: .06em; }
+.brand-mark { width: 12px; height: 12px; border-radius: 3px; background: var(--artifact-primary-brand); }
+.eyebrow { margin: 0 0 8px; color: var(--artifact-text-secondary); font: 500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; }
+header { padding: 38px 0 30px; }
+h1 { max-width: 760px; margin: 0; font-size: clamp(34px, 6vw, 58px); line-height: 1.04; letter-spacing: -.055em; font-weight: 590; }
+.intro { max-width: 660px; margin: 16px 0 0; color: var(--artifact-text-secondary); font-size: 16px; }
+.data-status { margin-top: 22px; padding: 12px 14px; border: 1px solid var(--artifact-border-light); border-radius: 8px; background: var(--artifact-background-light); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px; }
+.status-copy { min-width: 0; }
+.status-title { display: block; font-weight: 650; margin-bottom: 2px; }
+.status-detail { display: block; color: var(--artifact-text-secondary); font-size: 13px; overflow-wrap: anywhere; }
+.section { padding: 26px 0 34px; border-top: 1px solid var(--artifact-border-light); }
+.section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 20px; }
+.section-head h2 { margin: 0; font-size: 25px; letter-spacing: -.035em; font-weight: 560; }
+.section-desc { margin: 6px 0 0; color: var(--artifact-text-secondary); font-size: 14px; }
+.section-kicker { color: var(--artifact-text-secondary); font: 500 11px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 5px; }
+.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin: 18px 0; }
+.filter-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.filter-field label { color: var(--artifact-text-secondary); font-size: 12px; font-weight: 600; }
+select, input[type="search"] { min-height: 42px; width: 100%; border: 1px solid var(--artifact-border-dark); border-radius: 7px; padding: 9px 11px; background: var(--artifact-background); color: var(--artifact-text-primary); }
+select:focus, input:focus, button:focus-visible { outline: 3px solid color-mix(in srgb, var(--artifact-primary-brand) 34%, transparent); outline-offset: 2px; }
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.btn { min-height: 42px; border: 1px solid var(--artifact-border-dark); border-radius: 7px; background: var(--artifact-background); color: var(--artifact-text-primary); padding: 9px 15px; font-weight: 620; transition: background .15s ease, border-color .15s ease, transform .15s ease; }
+.btn:hover { background: var(--artifact-background-light); }
+.btn:active { transform: translateY(1px); }
+.btn-primary { border-color: var(--artifact-primary-brand); background: var(--artifact-primary-brand); color: var(--artifact-background); }
+.btn-primary:hover { border-color: var(--artifact-primary-hover); background: var(--artifact-primary-hover); color: var(--artifact-background); }
+.match-count { color: var(--artifact-text-secondary); font-size: 13px; margin-left: auto; }
+.featured { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(240px, .85fr); gap: 24px; margin-top: 20px; align-items: start; }
+.featured-media { min-height: 260px; background: var(--artifact-background-light); border-radius: 10px; overflow: hidden; display: grid; place-items: center; color: var(--artifact-text-secondary); }
+.featured-media img { display: block; width: 100%; max-height: 560px; object-fit: contain; }
+.featured-info { padding: 4px 0; }
+.featured-info h3 { margin: 0 0 12px; font-size: 22px; font-weight: 580; overflow-wrap: anywhere; }
+.meta-list { display: grid; grid-template-columns: minmax(90px, .45fr) minmax(0, 1fr); gap: 8px 14px; margin: 0; }
+.meta-list dt { color: var(--artifact-text-secondary); font-size: 13px; }
+.meta-list dd { margin: 0; font-size: 14px; overflow-wrap: anywhere; }
+.empty { padding: 28px 16px; border: 1px dashed var(--artifact-border-dark); border-radius: 9px; text-align: center; color: var(--artifact-text-secondary); }
+.catalog-tools { display: grid; grid-template-columns: minmax(220px, 1fr) auto; gap: 12px; align-items: end; }
+.catalog-tools .filters { grid-column: 1 / -1; margin: 0; }
+.catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 16px; margin-top: 20px; }
+.item { min-width: 0; }
+.item-media { height: 200px; display: grid; place-items: center; overflow: hidden; border-radius: 8px; background: var(--artifact-background-light); color: var(--artifact-text-secondary); }
+.item-media img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.item-name { margin: 9px 0 4px; font-size: 14px; font-weight: 650; overflow-wrap: anywhere; }
+.item-meta { color: var(--artifact-text-secondary); font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.item-meta span + span::before { content: " · "; color: var(--artifact-border-dark); }
+.load-more { display: block; margin: 20px auto 0; }
+.setup { margin-top: 20px; padding: 16px; border: 1px solid var(--artifact-border-light); border-radius: 8px; background: var(--artifact-background-light); }
+.setup h3 { margin: 0 0 7px; font-size: 14px; }
+.setup p { margin: 5px 0; color: var(--artifact-text-secondary); font-size: 13px; }
+code { padding: 2px 5px; border-radius: 4px; background: var(--artifact-background-mid); color: var(--artifact-text-primary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .92em; overflow-wrap: anywhere; }
+.error { color: var(--artifact-negative); }
+footer { padding: 18px 0 0; border-top: 1px solid var(--artifact-border-light); color: var(--artifact-text-secondary); font-size: 12px; }
+@media (max-width: 700px) {
+  .shell { padding: 20px 16px 40px; }
+  header { padding: 30px 0 24px; }
+  .featured { grid-template-columns: 1fr; gap: 16px; }
+  .featured-media { min-height: 220px; }
+  .catalog-tools { grid-template-columns: 1fr; }
+  .catalog-tools .filters { grid-column: auto; }
+  .section-head { align-items: flex-start; flex-direction: column; }
+  .match-count { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+}
+@media print {
+  @page { size: auto !important; }
+  body { margin: 0; padding: 0.4in 0.6in; background: var(--artifact-background); color: var(--artifact-text-primary); print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .shell { width: 100%; max-width: 100%; padding: 0; }
+  .btn, .toolbar, .catalog-tools, .setup, .load-more { display: none !important; }
+  .section { break-inside: avoid; }
+  .catalog-grid { grid-template-columns: repeat(3, 1fr); }
+  .item { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main class="shell" data-glean-id="app-shell">
+  <div class="topline" data-glean-id="app-brand"><div class="brand"><span class="brand-mark" aria-hidden="true"></span><span>IMAGE DECK</span></div><span class="eyebrow" style="margin:0">LOCAL CATALOG · CSV INDEX</span></div>
+  <header data-glean-id="app-intro">
+    <p class="eyebrow">条件抽選と画像カタログ</p>
+    <h1>条件から探す。<br>ランダムに出会う。</h1>
+    <p class="intro">CSVに登録した画像の特徴を使って、条件付き抽選とカタログ検索ができます。</p>
+    <div class="data-status" id="dataStatus" data-glean-id="data-status" aria-live="polite">
+      <div class="status-copy"><span class="status-title" id="statusTitle">CSVを読み込んでいます</span><span class="status-detail" id="statusDetail">同じ場所にある manifest.csv を確認中です。</span></div>
+    </div>
+    <div class="setup" id="setupHelp" data-glean-id="setup-help">
+      <h3>最初に用意するファイル</h3>
+      <p><code>index.html</code>と<code>manifest.csv</code>を同じ場所に置き、画像は<code>images/</code>フォルダにまとめます。</p>
+      <p>CSVの列名は<code>filename,color,size,role,date</code>。filenameには<code>images/1.png</code>のような相対パスを記入します。特徴は列ごとに分けると検索しやすくなります。</p>
+      <p>ローカルでは<code>file://</code>で直接開かず、ローカルサーバー経由で開いてください。GitHub Pagesに置いた場合は、発行されたページURLから読み込めます。</p>
+    </div>
+  </header>
+  <section class="section" aria-labelledby="drawTitle" data-glean-id="random-section">
+    <div class="section-head"><div><div class="section-kicker">01 / RANDOM PICK</div><h2 id="drawTitle">条件付きランダム抽選</h2><p class="section-desc">選んだ条件すべてに一致する画像の中から、1枚を抽選します。</p></div></div>
+    <div class="filters" id="drawFilters" data-glean-id="random-filters"></div>
+    <div class="toolbar"><button class="btn btn-primary" id="drawButton" type="button">条件に合う画像を抽選</button><button class="btn" id="clearDraw" type="button">条件をクリア</button><span class="match-count" id="drawCount" aria-live="polite">データ未読込</span></div>
+    <div id="drawResult" class="empty" data-glean-id="random-result" aria-live="polite">CSVを読み込むと抽選できます。</div>
+  </section>
+  <section class="section" aria-labelledby="catalogTitle" data-glean-id="catalog-section">
+    <div class="section-head"><div><div class="section-kicker">02 / SEARCH CATALOG</div><h2 id="catalogTitle">条件検索カタログ</h2><p class="section-desc">条件やキーワードで絞り込み、該当画像を一覧表示します。</p></div></div>
+    <div class="catalog-tools">
+      <div class="filter-field"><label for="keyword">キーワード</label><input id="keyword" type="search" placeholder="画像名・特徴を検索" autocomplete="off"></div>
+      <div class="toolbar"><button class="btn" id="clearCatalog" type="button">検索条件をクリア</button><span class="match-count" id="catalogCount" aria-live="polite">データ未読込</span></div>
+      <div class="filters" id="catalogFilters" data-glean-id="catalog-filters"></div>
+    </div>
+    <div class="catalog-grid" id="catalogGrid" data-glean-id="catalog-grid"></div>
+    <button class="btn load-more" id="loadMore" type="button" hidden>さらに表示</button>
+    <div id="catalogEmpty" class="empty" hidden>条件に一致する画像がありません。</div>
+  </section>
+  <footer data-glean-id="app-footer">画像の追加・特徴の変更は、imagesフォルダとmanifest.csvを更新して公開先へ反映してください。</footer>
 </main>
 <script>
 'use strict';
@@ -64,172 +160,197 @@ const state = { rows: [], headers: [], fileKey: null, attributes: [], drawFilter
 const byId = id => document.getElementById(id);
 const normalize = value => String(value ?? '').trim().toLowerCase();
 const tagColumn = key => /tag|タグ/i.test(key);
+
 function splitValues(value, key) {
-const text = String(value ?? '').trim();
-if (!text) return [];
-return tagColumn(key) ? text.split(/[|;、]+/).map(v => v.trim()).filter(Boolean) : [text];
+  const text = String(value ?? '').trim();
+  if (!text) return [];
+  return tagColumn(key) ? text.split(/[|;、]+/).map(v => v.trim()).filter(Boolean) : [text];
 }
+
 function parseCSV(text) {
-const rows = []; let row = []; let field = ''; let quoted = false;
-text = text.replace(/^\uFEFF/, '');
-for (let i = 0; i < text.length; i++) {
-const ch = text[i];
-if (quoted) {
-if (ch === '"' && text[i + 1] === '"') { field += '"'; i++; }
-else if (ch === '"') quoted = false;
-else field += ch;
-} else if (ch === '"') quoted = true;
-else if (ch === ',') { row.push(field); field = ''; }
-else if (ch === '
-') { row.push(field.replace(/\r$/, '')); if (row.some(v => v.trim() !== '')) rows.push(row); row = []; field = ''; }
-else field += ch;
+  const rows = []; let row = []; let field = ''; let quoted = false;
+  text = text.replace(/^\uFEFF/, '');
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (quoted) {
+      if (ch === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (ch === '"') quoted = false;
+      else field += ch;
+    } else if (ch === '"') quoted = true;
+    else if (ch === ',') { row.push(field); field = ''; }
+    else if (ch === '\n') { row.push(field.replace(/\r$/, '')); if (row.some(v => v.trim() !== '')) rows.push(row); row = []; field = ''; }
+    else field += ch;
+  }
+  row.push(field.replace(/\r$/, '')); if (row.some(v => v.trim() !== '')) rows.push(row);
+  if (!rows.length) throw new Error('CSVにヘッダー行がありません。');
+  const headers = rows.shift().map(h => h.trim());
+  if (headers.some(h => !h)) throw new Error('CSVの列名に空欄があります。');
+  const aliases = new Set(['filename', 'file', 'image', 'src', '画像', 'ファイル名']);
+  const fileKey = headers.find(h => aliases.has(normalize(h)));
+  if (!fileKey) throw new Error('画像パスの列が見つかりません。先頭行に filename 列を用意してください。');
+  const records = rows.map(cells => {
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = (cells[i] ?? '').trim(); });
+    return obj;
+  }).filter(obj => obj[fileKey]);
+  return { headers, fileKey, records };
 }
-row.push(field.replace(/\r$/, '')); if (row.some(v => v.trim() !== '')) rows.push(row);
-if (!rows.length) throw new Error('CSVにヘッダー行がありません。');
-const headers = rows.shift().map(h => h.trim());
-if (headers.some(h => !h)) throw new Error('CSVの列名に空欄があります。');
-const aliases = new Set(['filename','file','image','src','画像','ファイル名']);
-const fileKey = headers.find(h => aliases.has(normalize(h)));
-if (!fileKey) throw new Error('画像パスの列が見つかりません。先頭行に filename 列を用意してください。');
-const records = rows.map(cells => {
-const obj = {};
-headers.forEach((h, i) => { obj[h] = (cells[i] ?? '').trim(); });
-return obj;
-}).filter(obj => obj[fileKey]);
-return { headers, fileKey, records };
+
+function setStatus(title, detail, isError = false) {
+  byId('statusTitle').textContent = title;
+  byId('statusTitle').classList.toggle('error', isError);
+  byId('statusDetail').textContent = detail;
 }
-function setStatus(title, detail, isError=false) {
-byId('statusTitle').textContent = title;
-byId('statusTitle').classList.toggle('error', isError);
-byId('statusDetail').textContent = detail;
-}
-function attributeOptions(key) {
-const values = new Set();
-state.rows.forEach(row => splitValues(row[key], key).forEach(v => values.add(v)));
-return [...values].sort((a,b) => a.localeCompare(b, 'ja'));
-}
-function renderFilterGroup(container, filterState, callback, stablePrefix) {
-container.replaceChildren();
-state.attributes.forEach(key => {
-const wrap = document.createElement('div'); wrap.className = 'filter-field'; wrap.dataset.gleanId = `${stablePrefix}-${slug(key)}`;
-const label = document.createElement('label'); label.textContent = key; label.htmlFor = `${stablePrefix}-select-${slug(key)}`;
-const select = document.createElement('select'); select.id= label.htmlFor; select.setAttribute('aria-label', `${key}で絞り込む`);
-const all = document.createElement('option'); all.value = ''; all.textContent = `すべて`; select.append(all);
-attributeOptions(key).forEach(value => { const option=document.createElement('option'); option.value=value; option.textContent=value; select.append(option); });
-select.value = filterState[key] || '';
-select.addEventListener('change', () => { filterState[key] = select.value; callback(); });
-wrap.append(label, select); container.append(wrap);
-});
-}
+
 function slug(value) { return String(value).toLowerCase().replace(/[^a-z0-9_-]+/g, '-').replace(/^-+|-+$/g, '') || 'field'; }
+
+function attributeOptions(key) {
+  const values = new Set();
+  state.rows.forEach(row => splitValues(row[key], key).forEach(v => values.add(v)));
+  return [...values].sort((a, b) => a.localeCompare(b, 'ja'));
+}
+
+function renderFilterGroup(container, filterState, callback, stablePrefix) {
+  container.replaceChildren();
+  state.attributes.forEach(key => {
+    const wrap = document.createElement('div'); wrap.className = 'filter-field'; wrap.dataset.gleanId = `${stablePrefix}-${slug(key)}`;
+    const label = document.createElement('label'); label.textContent = key; label.htmlFor = `${stablePrefix}-select-${slug(key)}`;
+    const select = document.createElement('select'); select.id = label.htmlFor; select.setAttribute('aria-label', `${key}で絞り込む`);
+    const all = document.createElement('option'); all.value = ''; all.textContent = 'すべて'; select.append(all);
+    attributeOptions(key).forEach(value => { const option = document.createElement('option'); option.value = value; option.textContent = value; select.append(option); });
+    select.value = filterState[key] || '';
+    select.addEventListener('change', () => { filterState[key] = select.value; callback(); });
+    wrap.append(label, select); container.append(wrap);
+  });
+}
+
 function imageURL(row) {
-const raw = String(row[state.fileKey] || '').trim();
-try {
-const url = new URL(raw, new URL('./', window.location.href));
-if (!['http:', 'https:'].includes(url.protocol)) return null;
-return url.href;
-} catch (_) { return null; }
+  const raw = String(row[state.fileKey] || '').trim();
+  try {
+    const url = new URL(raw, new URL('./', window.location.href));
+    if (!['http:', 'https:'].includes(url.protocol)) return null;
+    return url.href;
+  } catch (_) { return null; }
 }
-function matches(row, filters, query='') {
-for (const key of state.attributes) {
-const selected = filters[key];
-if (selected && !splitValues(row[key], key).includes(selected)) return false;
+
+function matches(row, filters, query = '') {
+  for (const key of state.attributes) {
+    const selected = filters[key];
+    if (selected && !splitValues(row[key], key).includes(selected)) return false;
+  }
+  if (query) {
+    const haystack = [row[state.fileKey], ...state.attributes.map(k => row[k])].join(' ').toLocaleLowerCase('ja');
+    if (!haystack.includes(query.toLocaleLowerCase('ja'))) return false;
+  }
+  return true;
 }
-if (query) {
-const haystack = [row[state.fileKey], ...state.attributes.map(k => row[k])].join(' ').toLocaleLowerCase('ja');
-if (!haystack.includes(query.toLocaleLowerCase('ja'))) return false;
-}
-return true;
-}
+
 function matchedDraw() { return state.rows.filter(row => matches(row, state.drawFilters)); }
 function matchedCatalog() { return state.rows.filter(row => matches(row, state.catalogFilters, byId('keyword').value.trim())); }
 function displayName(row) { return String(row[state.fileKey]).split('/').pop(); }
 function metaPairs(row) { return state.attributes.filter(key => String(row[key] ?? '').trim()).map(key => [key, row[key]]); }
+
 function makeImage(row, className, alt) {
-const url = imageURL(row);
-if (!url) { const fallback=document.createElement('div'); fallback.textContent='画像パスを確認してください'; fallback.className=className; return fallback; }
-const img=document.createElement('img'); img.src=url; img.alt=alt; img.loading='lazy';
-img.addEventListener('error', () => { const message=document.createElement('div'); message.className=className; message.textContent=`画像が見つかりません: ${displayName(row)}`; img.replaceWith(message); }, {once:true});
-return img;
+  const url = imageURL(row);
+  if (!url) { const fallback = document.createElement('div'); fallback.textContent = '画像パスを確認してください'; fallback.className = className; return fallback; }
+  const img = document.createElement('img'); img.src = url; img.alt = alt; img.loading = 'lazy';
+  img.addEventListener('error', () => { const message = document.createElement('div'); message.className = className; message.textContent = `画像が見つかりません: ${displayName(row)}`; img.replaceWith(message); }, { once: true });
+  return img;
 }
+
 function renderDrawResult(row) {
-const target=byId('drawResult'); target.replaceChildren(); target.className='';
-if (!row) { target.className='empty'; target.textContent='条件に一致する画像がありません。条件またはCSVを確認してください。'; target.dataset.gleanId='random-result'; return; }
-target.dataset.gleanId='random-result';
-const featured=document.createElement('div'); featured.className='featured';
-const media=document.createElement('div'); media.className='featured-media'; media.append(makeImage(row,'featured-media',displayName(row)));
-const info=document.createElement('div'); info.className='featured-info';
-const title=document.createElement('h3'); title.textContent=displayName(row); info.append(title);
-const dl=document.createElement('dl'); dl.className='meta-list';
-metaPairs(row).forEach(([key,value]) => { const dt=document.createElement('dt'); dt.textContent=key; const dd=document.createElement('dd'); dd.textContent=value; dl.append(dt,dd); });
-info.append(dl); featured.append(media,info); target.append(featured);
+  const target = byId('drawResult'); target.replaceChildren(); target.className = '';
+  target.dataset.gleanId = 'random-result';
+  if (!row) { target.className = 'empty'; target.textContent = '条件に一致する画像がありません。条件またはCSVを確認してください。'; return; }
+  const featured = document.createElement('div'); featured.className = 'featured';
+  const media = document.createElement('div'); media.className = 'featured-media'; media.append(makeImage(row, 'featured-media', displayName(row)));
+  const info = document.createElement('div'); info.className = 'featured-info';
+  const title = document.createElement('h3'); title.textContent = displayName(row); info.append(title);
+  const dl = document.createElement('dl'); dl.className = 'meta-list';
+  metaPairs(row).forEach(([key, value]) => { const dt = document.createElement('dt'); dt.textContent = key; const dd = document.createElement('dd'); dd.textContent = value; dl.append(dt, dd); });
+  info.append(dl); featured.append(media, info); target.append(featured);
 }
+
 function renderDrawCount() {
-const count=matchedDraw().length; byId('drawCount').textContent=state.rows.length ? `抽選候補 ${count} / ${state.rows.length} 枚` : 'データ未読込';
+  const count = matchedDraw().length;
+  byId('drawCount').textContent = state.rows.length ? `抽選候補 ${count} / ${state.rows.length} 枚` : 'データ未読込';
 }
+
 function renderCatalog() {
-const all=matchedCatalog(); const grid=byId('catalogGrid'); grid.replaceChildren();
-const visible=all.slice(0,state.catalogLimit);
-visible.forEach(row => {
-const item=document.createElement('article'); item.className='item'; item.dataset.gleanId=`catalog-${slug(row[state.fileKey])}`;
-const media=document.createElement('div'); media.className='item-media'; media.append(makeImage(row,'item-media',displayName(row)));
-const title=document.createElement('h3'); title.className='item-name'; title.textContent=displayName(row);
-const meta=document.createElement('div'); meta.className='item-meta';
-metaPairs(row).forEach(([key,value]) => { const span=document.createElement('span'); span.textContent=`${key}: ${value}`; meta.append(span); });
-item.append(media,title,meta); grid.append(item);
-});
-byId('catalogCount').textContent=state.rows.length ? `表示 ${visible.length} / 該当 ${all.length} 枚` : 'データ未読込';
-byId('catalogEmpty').hidden=all.length!==0;
-byId('loadMore').hidden=all.length<=state.catalogLimit;
+  const all = matchedCatalog(); const grid = byId('catalogGrid'); grid.replaceChildren();
+  const visible = all.slice(0, state.catalogLimit);
+  visible.forEach(row => {
+    const item = document.createElement('article'); item.className = 'item'; item.dataset.gleanId = `catalog-${slug(row[state.fileKey])}`;
+    const media = document.createElement('div'); media.className = 'item-media'; media.append(makeImage(row, 'item-media', displayName(row)));
+    const title = document.createElement('h3'); title.className = 'item-name'; title.textContent = displayName(row);
+    const meta = document.createElement('div'); meta.className = 'item-meta';
+    metaPairs(row).forEach(([key, value]) => { const span = document.createElement('span'); span.textContent = `${key}: ${value}`; meta.append(span); });
+    item.append(media, title, meta); grid.append(item);
+  });
+  byId('catalogCount').textContent = state.rows.length ? `表示 ${visible.length} / 該当 ${all.length} 枚` : 'データ未読込';
+  byId('catalogEmpty').hidden = all.length !== 0;
+  byId('loadMore').hidden = all.length <= state.catalogLimit;
 }
-function refreshDrawFilters() { renderFilterGroup(byId('drawFilters'),state.drawFilters,renderDrawCount,'draw'); renderDrawCount(); }
-function refreshCatalogFilters() { renderFilterGroup(byId('catalogFilters'),state.catalogFilters,() => { state.catalogLimit=48; renderCatalog(); },'catalog'); renderCatalog(); }
-function updateAll() { renderDrawCount(); renderCatalog(); }
+
+function refreshDrawFilters() { renderFilterGroup(byId('drawFilters'), state.drawFilters, renderDrawCount, 'draw'); renderDrawCount(); }
+function refreshCatalogFilters() { renderFilterGroup(byId('catalogFilters'), state.catalogFilters, () => { state.catalogLimit = 48; renderCatalog(); }, 'catalog'); renderCatalog(); }
+
 function drawRandom() {
-const candidates=matchedDraw();
-if (!candidates.length) { renderDrawResult(null); return; }
-const previous=byId('drawResult').dataset.currentFile;
-let pool=candidates;
-if (candidates.length > 1 && previous) { const withoutPrevious=candidates.filter(r => r[state.fileKey] !== previous); if (withoutPrevious.length) pool=withoutPrevious; }
-const choice=pool[Math.floor(Math.random()pool.length)];
-byId('drawResult').dataset.currentFile=choice[state.fileKey];
-renderDrawResult(choice);
+  const candidates = matchedDraw();
+  if (!candidates.length) { renderDrawResult(null); return; }
+  const previous = byId('drawResult').dataset.currentFile;
+  let pool = candidates;
+  if (candidates.length > 1 && previous) {
+    const withoutPrevious = candidates.filter(r => r[state.fileKey] !== previous);
+    if (withoutPrevious.length) pool = withoutPrevious;
+  }
+  const choice = pool[Math.floor(Math.random() * pool.length)];
+  byId('drawResult').dataset.currentFile = choice[state.fileKey];
+  renderDrawResult(choice);
 }
+
 async function loadCSV() {
-try {
-const response=await fetch(new URL('./manifest.csv',window.location.href),{cache:'no-store'});
-if (!response.ok) throw new Error(`manifest.csv を取得できませんでした（HTTP ${response.status}）。HTMLとCSVを同じ公開フォルダに置いてください。`);
-const parsed=parseCSV(await response.text());
-state.headers=parsed.headers; state.fileKey=parsed.fileKey; state.rows=parsed.records;
-state.attributes=state.headers.filter(key => key !== state.fileKey);
-byId('setupHelp').hidden=state.rows.length>0;
-if (!state.rows.length) {
-setStatus('CSVを読み込みましたが、画像データがありません','manifest.csvにヘッダーと画像の行を追加してください。');
-} else {
-setStatus(`${state.rows.length}件の画像データを読み込みました`,'条件を選ぶと抽選候補とカタログが絞り込まれます。');
+  try {
+    const response = await fetch(new URL('./manifest.csv', window.location.href), { cache: 'no-store' });
+    if (!response.ok) throw new Error(`manifest.csv を取得できませんでした（HTTP ${response.status}）。HTMLとCSVを同じ公開フォルダに置いてください。`);
+    const parsed = parseCSV(await response.text());
+    state.headers = parsed.headers; state.fileKey = parsed.fileKey; state.rows = parsed.records;
+    state.attributes = state.headers.filter(key => key !== state.fileKey);
+    byId('setupHelp').hidden = state.rows.length > 0;
+    if (!state.rows.length) {
+      setStatus('CSVを読み込みましたが、画像データがありません', 'manifest.csvにヘッダーと画像の行を追加してください。');
+    } else {
+      setStatus(`${state.rows.length}件の画像データを読み込みました`, '条件を選ぶと抽選候補とカタログが絞り込まれます。');
+    }
+    refreshDrawFilters(); refreshCatalogFilters();
+    byId('drawResult').className = 'empty';
+    byId('drawResult').textContent = state.rows.length ? '条件を選んで「条件に合う画像を抽選」を押してください。' : 'CSVに画像データを追加すると抽選できます。';
+  } catch (error) {
+    state.error = error;
+    setStatus('CSVを読み込めません', error.message, true);
+    byId('setupHelp').hidden = false;
+    byId('drawCount').textContent = 'CSV未読込'; byId('catalogCount').textContent = 'CSV未読込';
+    byId('catalogEmpty').hidden = false;
+    byId('catalogEmpty').textContent = 'manifest.csvを読み込めません。HTMLとCSVを同じWebフォルダに置き、HTTP(S)で開いてください。';
+  }
 }
-refreshDrawFilters(); refreshCatalogFilters();
-byId('drawResult').className='empty'; byId('drawResult').textContent=state.rows.length ? '条件を選んで「条件に合う画像を抽選」を押してください。' : 'CSVに画像データを追加すると抽選できます。';
-} catch (error) {
-state.error=error;
-setStatus('CSVを読み込めません',error.message,true);
-byId('setupHelp').hidden=false;
-byId('drawCount').textContent='CSV未読込'; byId('catalogCount').textContent='CSV未読込';
-byId('catalogEmpty').hidden=false;
-byId('catalogEmpty').textContent='manifest.csvを読み込めません。HTMLとCSVを同じWebフォルダに置き、HTTP(S)で開いてください。';
-}
-}
-byId('drawButton').addEventListener('click',drawRandom);
-byId('clearDraw').addEventListener('click',() => { state.drawFilters={}; refreshDrawFilters(); byId('drawResult').dataset.currentFile=''; byId('drawResult').className='empty'; byId('drawResult').textContent='条件を選んで「条件に合う画像を抽選」を押してください。'; });
-byId('clearCatalog').addEventListener('click',() => { state.catalogFilters={}; byId('keyword').value=''; state.catalogLimit=48; refreshCatalogFilters(); });
-byId('keyword').addEventListener('input',() => { state.catalogLimit=48; renderCatalog(); });
-byId('loadMore').addEventListener('click',() => { state.catalogLimit+=48; renderCatalog(); });
+
+byId('drawButton').addEventListener('click', drawRandom);
+byId('clearDraw').addEventListener('click', () => {
+  state.drawFilters = {}; refreshDrawFilters();
+  byId('drawResult').dataset.currentFile = '';
+  byId('drawResult').className = 'empty';
+  byId('drawResult').textContent = '条件を選んで「条件に合う画像を抽選」を押してください。';
+});
+byId('clearCatalog').addEventListener('click', () => { state.catalogFilters = {}; byId('keyword').value = ''; state.catalogLimit = 48; refreshCatalogFilters(); });
+byId('keyword').addEventListener('input', () => { state.catalogLimit = 48; renderCatalog(); });
+byId('loadMore').addEventListener('click', () => { state.catalogLimit += 48; renderCatalog(); });
 loadCSV();
 </script>
 <script>
 if (window.GleanBridge) {
-window.GleanBridge.postMessage({actionId:'export-pdf',type:'glean-add-menu',metadata:{label:'Export as PDF',icon:'export'}});
-window.GleanBridge.onMessage('action',function(data){if(data.actionId==='export-pdf')window.print();});
+  window.GleanBridge.postMessage({ actionId: 'export-pdf', type: 'glean-add-menu', metadata: { label: 'Export as PDF', icon: 'export' } });
+  window.GleanBridge.onMessage('action', function (data) { if (data.actionId === 'export-pdf') window.print(); });
 }
 </script>
 </body>
